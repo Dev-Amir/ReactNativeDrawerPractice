@@ -1,19 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import { View, Text } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { createStackNavigator } from "@react-navigation/stack";
+import FeedStack from './pages/Feed';
+import ArticleTab from './pages/Article';
+import MyTabs from './pages/Tab';
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Drawer.Navigator
+        drawerContentOptions={{
+            itemStyle: {alignItems: "center"},
+            activeBackgroundColor: "black",
+            activeTintColor: "white"
+        }}
+    >
+      <Drawer.Screen name="Root" component={FeedStack} />
+      <Drawer.Screen name="Tab" component={MyTabs} />
+      <Drawer.Screen name="Article" component={ArticleTab} />
+    </Drawer.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+
+    return (
+        <NavigationContainer>
+            <MyDrawer />         
+            {/* <Stacks />   */}
+        </NavigationContainer>
+    )
+}
+
+export default App;
